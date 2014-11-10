@@ -1,0 +1,71 @@
+﻿<Window x:Class="KaloriLaskuri.UsersCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:namespace="clr-namespace:KaloriLaskuri"
+        Title="Käyttäjien hallinta" MinHeight="300"  Closing="Window_Closing" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Window.Resources>
+        <namespace:Genders x:Key="Genders"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="115" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <DataGrid CanUserAddRows="false" AutoGenerateColumns="False" ItemsSource="{Binding}" Height="238" HorizontalAlignment="Left" Margin="12,12,0,12" Name="dataGridUsersCRUD" VerticalAlignment="Top" Width="Auto">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Header="Sukunimi" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=sukunimi, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Etunimi" Width="75">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=etunimi, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Syntymäaika" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Path=syntyma_aika, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Path=syntyma_aika}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Sukup." Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedItem="{Binding Path=sukupuoli, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{StaticResource Genders}"/>
+                            <!--TextBlock Text="{Binding Path=sukupuoli, UpdateSourceTrigger=PropertyChanged}"/-->
+                        </DataTemplate>                        
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedItem="{Binding Path=sukupuoli, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{StaticResource Genders}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Pituus" Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=pituus, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>                
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="_Uusi käyttäjä" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,17" Name="buttonNewUser" VerticalAlignment="Top" Width="95" Click="buttonNewUser_Click" />
+        <Button Content="_Poista käyttäjä" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,47" Name="buttonRemoveUser" VerticalAlignment="Top" Width="95" Click="buttonRemoveUser_Click" />
+        <Button Content="_Sulje" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,77" Name="buttonClose" VerticalAlignment="Top" Width="95" Click="buttonClose_Click" />
+
+    </Grid>
+</Window>

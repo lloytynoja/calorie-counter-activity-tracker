@@ -1,0 +1,97 @@
+﻿<Window x:Class="KaloriLaskuri.FoodsCreate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ns="clr-namespace:KaloriLaskuri"
+        Title="Uusi ruoka-aine" Height="430" Width="300" Name="FoodsCr">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                                                        Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nimi -->
+        <Label Grid.Row="0" Grid.Column="0" Content="Nimi:" Margin="5,0"/>
+        <TextBox Grid.Row="0" Name="textBoxNimi" Margin="20,25,64,15" />
+        <!-- Energia -->
+        <Label Grid.Row="1" Grid.Column="0" Content="Energia (kcal/100g):" Margin="5,0"/>
+        <TextBox Grid.Row="1" Name="textBoxEnergia" Margin="20,25,164,15">
+            <TextBox.Text>
+                <Binding ElementName="FoodsCr" Path="Energy" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ns:IntegerRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <!-- Proteiini -->
+        <Label Grid.Row="2" Grid.Column="0" Content="Proteiini (g/100g):" Margin="5,0"/>
+        <TextBox Grid.Row="2" Name="textBoxProteiini" Margin="20,25,164,15">
+            <TextBox.Text>
+                <Binding ElementName="FoodsCr" Path="Protein" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ns:DecimalRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <!-- Hiilihydraatti -->
+        <Label Grid.Row="3" Grid.Column="0" Content="Hiilihydraatti (g/100g):" Margin="5,0"/>
+        <TextBox Grid.Row="3" Name="textBoxHiilihydraatti" Margin="20,25,164,15" >
+            <TextBox.Text>
+                <Binding ElementName="FoodsCr" Path="Carbs" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ns:DecimalRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <!-- Rasva -->
+        <Label Grid.Row="4" Grid.Column="0" Content="Rasva (g/100g):" Margin="5,0"/>
+        <TextBox Grid.Row="4" Name="textBoxRasva" Margin="20,25,164,15">
+            <TextBox.Text>
+                <Binding ElementName="FoodsCr" Path="Fat" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ns:DecimalRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <Button Content="_OK" Grid.Row="5" Height="23" HorizontalAlignment="Left" Margin="113,10,0,0" Name="buttonOK" VerticalAlignment="Top" Width="75" Click="buttonOK_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="IsEnabled" Value="false"/>
+                    <Style.Triggers >
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=textBoxEnergia, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=textBoxProteiini, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=textBoxHiilihydraatti, Path=(Validation.HasError)}" Value="false" />
+                                <Condition Binding="{Binding ElementName=textBoxRasva, Path=(Validation.HasError)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="true"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="_Peruuta" Grid.Row="5" Height="23" HorizontalAlignment="Left" Margin="195,10,0,0" Name="buttonCancel" VerticalAlignment="Top" Width="75" Click="buttonCancel_Click" />
+    </Grid>
+</Window>

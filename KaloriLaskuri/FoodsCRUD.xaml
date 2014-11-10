@@ -1,0 +1,55 @@
+﻿<Window x:Class="KaloriLaskuri.FoodsCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ruoka-aineiden hallinta" MinHeight="300" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="125" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <DataGrid CanUserAddRows="false" AutoGenerateColumns="False" ItemsSource="{Binding}" Height="238" HorizontalAlignment="Left" Margin="12,12,0,12" Name="dataGridFoodsCRUD" VerticalAlignment="Top" Width="Auto">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Header="Nimi" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=nimi, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Energia (kcal)" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=energia, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Proteiini" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=proteiini, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Hiilihydraatti" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=hiilihydraatti, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Rasva" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=rasva, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="_Uusi ruoka-aine" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,17" Name="buttonNewUser" VerticalAlignment="Top" Width="105" Click="buttonNewFood_Click" />
+        <Button Content="_Poista ruoka-aine" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,47" Name="buttonRemoveUser" VerticalAlignment="Top" Width="105" Click="buttonRemoveFood_Click" />
+        <Button Content="_Sulje" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,77" Name="buttonClose" VerticalAlignment="Top" Width="105" Click="buttonClose_Click" />
+    </Grid>
+</Window>

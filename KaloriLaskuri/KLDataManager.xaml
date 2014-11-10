@@ -1,0 +1,11 @@
+﻿<Window x:Class="KaloriLaskuri.KLDataManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataManager" Height="144" Width="221">
+   
+    <StackPanel Height="100" HorizontalAlignment="Left" Margin="0" Name="stackPanel1" VerticalAlignment="Top" Width="200">
+        <Button Content="Lisää testidata" Height="23" Name="buttonLisaaDummyData" Width="124" Click="buttonLisaaDummyData_Click" />
+        <Button Content="Poista kaikki data" Height="23" Name="buttonPoistaData" Width="124" Click="buttonPoistaData_Click" />
+
+    </StackPanel>
+</Window>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="KaloriLaskuri.ActivitiesCRUD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Aktiviteettien hallinta" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="125" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <DataGrid CanUserAddRows="false" AutoGenerateColumns="False" ItemsSource="{Binding}" MinHeight="200" HorizontalAlignment="Left" Margin="12,12,0,12" Name="dataGridActivitiesCRUD" VerticalAlignment="Top" Width="Auto">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Header="Nimi" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=nimi, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Kulutus kcal/h" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Path=kulutus, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="_Uusi aktiviteetti" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,17" Name="buttonNewUser" VerticalAlignment="Top" Width="105" Click="buttonNewActivity_Click" />
+        <Button Content="_Poista aktiviteetti" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,47" Name="buttonRemoveUser" VerticalAlignment="Top" Width="105" Click="buttonRemoveActivity_Click" />
+        <Button Content="_Sulje" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="0,77" Name="buttonClose" VerticalAlignment="Top" Width="105" Click="buttonClose_Click" />
+
+    </Grid>
+</Window>

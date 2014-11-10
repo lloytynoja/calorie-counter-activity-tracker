@@ -1,0 +1,102 @@
+﻿<Window x:Class="KaloriLaskuri.DayExplorerActivityList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ns="clr-namespace:KaloriLaskuri"
+        Name="actLst"
+        Title="Valitse aktiviteetti" Height="300" Width="500" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, 
+                                                        Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <DataGrid CanUserAddRows="false" AutoGenerateColumns="False" ItemsSource="{Binding}" MinHeight="180" HorizontalAlignment="Left" Margin="12,12,0,0" Name="dataGridDoneActivityCRUD" VerticalAlignment="Top" Width="455" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Header="Nimi" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Path=nimi}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Energia (kcal/h)">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Path=kulutus}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="_Lisää suoritus" HorizontalAlignment="Right" Width="100" Height="30" Margin="0,0,100,0"  Grid.Row="1" Name="buttonAddDoneActivity" Click="buttonAddDoneActivity_Click" />
+        <Button Content="_Sulje" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,0,15,0" Grid.Row="1" Name="buttonClose" Click="buttonClose_Click" />
+        <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Width="50" Height="30" Margin="0,0,235,0" Grid.Row="1" Name="textBoxAmount">
+            <Binding ElementName="actLst" Path="Duration" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <ns:PositiveIntegerRule/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        <Label Grid.Row="1" Content="min" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,205,0"/>
+        <Label Grid.Row="1" Content="Kellonaika" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,420,0"/>
+        <Label Grid.Row="1" Content="h" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,368,0"/>
+        <Label Grid.Row="1" Content="min" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,307,0"/>
+        <CheckBox IsChecked="True" Visibility="Hidden" Name="checkBoxAika" Grid.Row="1"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,420,0" />
+
+        <TextBox Name="textBoxMinuutit" Width="30" Height="30" Grid.Row="1"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0,0,215,0">
+            <Binding ElementName="actLst" Path="Minutes" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <ns:MinuteRule/>
+                </Binding.ValidationRules>
+            </Binding>
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="IsReadOnly" Value="false"/>
+                    <Style.Triggers >
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=checkBoxAika, Path=(IsChecked)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsReadOnly" Value="true"/>
+                            <Setter Property="Foreground" Value="GhostWhite"/>
+                            <Setter Property="Background" Value="GhostWhite"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <TextBox Name="textBoxTunnit" Width="30" Height="30" Grid.Row="1"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Margin="0,0,310,0" >
+            <Binding ElementName="actLst" Path="Hours" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <ns:HourRule/>
+                </Binding.ValidationRules>
+            </Binding>
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="IsReadOnly" Value="false"/>
+                    <Style.Triggers >
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ElementName=checkBoxAika, Path=(IsChecked)}" Value="false" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsReadOnly" Value="true"/>
+                            <Setter Property="Text" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="GhostWhite"/>
+                            <Setter Property="Background" Value="GhostWhite"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+    </Grid>
+</Window>
